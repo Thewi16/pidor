@@ -1,0 +1,16 @@
+> blesed:
+Найти ребро куба,объём которого равен v
+
+#include <iostream>
+#include <cmath>
+using namespace std; 
+ 
+int main() 
+{
+float a, V;
+cout <<"Введите объём куба V" << endl;
+cin >> V;
+a=cbrt(V);
+cout <<"Ребро куба="<< a;
+return 0;
+}
