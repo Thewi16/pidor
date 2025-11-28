@@ -1,6 +1,3 @@
-> blesed:
-Найти ребро куба,объём которого равен v
-
 #include <iostream>
 #include <cmath>
 using namespace std; 
