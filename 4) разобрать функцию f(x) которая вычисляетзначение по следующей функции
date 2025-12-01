@@ -1,0 +1,15 @@
+#include <iostream>
+#include <cmath>
+using namespace std;
+
+float f(float x)
+{
+return pow(x,3)-sin(x);
+}
+int main(){
+    float a;
+    cout << "введите значение" << endl;
+    cin >> a;
+    cout << f(a);
+    return 0;
+}
