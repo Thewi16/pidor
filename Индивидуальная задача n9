@@ -1,0 +1,46 @@
+#include <iostream>
+#include <cmath>
+
+int main() {
+    // Прямые: y = |x| и y = 12
+    // Точки пересечения: |x| = 12  =>  x = -12, x = 12
+    double left_x = -12.0;
+    double right_x = 12.0;
+    double top_y = 12.0;
+
+    // Площадь заштрихованной области = интеграл от (12 - |x|) dx от -12 до 12
+    // Из-за симметрии: 2 * интеграл от (12 - x) dx от 0 до 12
+
+    auto area_symmetric = [](double x) {
+        return 12.0 - x;
+    };
+
+    // Аналитическое вычисление: 2 * ∫(12 - x) dx от 0 до 12
+    // Первообразная: 12x - x^2/2
+    // На отрезке [0,12]: (12*12 - 12^2/2) - (0) = 144 - 72 = 72
+    // Умножаем на 2: 144
+
+    double area_analytical = 144.0;
+
+    // Численное интегрирование (метод прямоугольников) для проверки
+    int n = 1000000; // количество разбиений
+    double step = (right_x - left_x) / n;
+    double area_numeric = 0.0;
+
+    for (int i = 0; i < n; ++i) {
+        double x = left_x + i * step;
+        double y_bottom = std::abs(x);
+        double y_top = top_y;
+        if (y_bottom < y_top) {
+            area_numeric += (y_top - y_bottom) * step;
+        }
+    }
+
+    std::cout << "=== Вычисление площади заштрихованной фигуры ===\n";
+    std::cout << "Фигура ограничена: y = |x| (снизу) и y = 12 (сверху)\n";
+    std::cout << "Точки пересечения: x = -12, x = 12\n\n";
+    std::cout << "Аналитический результат (точный): " << area_analytical << " кв. ед.\n";
+    std::cout << "Численное интегрирование:       " << area_numeric << " кв. ед.\n";
+
+    return 0;
+}
