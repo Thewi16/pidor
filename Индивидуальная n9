@@ -1,0 +1,31 @@
+#include <iostream>
+#include <cmath>
+
+// Подынтегральная функция для правой половины (y = 12 - |x|)
+double f(double x) {
+    return 12 - std::abs(x);
+}
+
+// Численное интегрирование методом прямоугольников
+double integrate(double a, double b, int n) {
+    double h = (b - a) / n;
+    double sum = 0.0;
+    for (int i = 0; i < n; ++i) {
+        double x = a + (i + 0.5) * h;
+        sum += f(x);
+    }
+    return sum * h;
+}
+
+int main() {
+
+    double area_analytic = 144.0;
+    std::cout << "Аналитическая площадь: " << area_analytic << std::endl;
+
+    // Численное интегрирование для проверки
+    int n = 1000000; // количество разбиений
+    double area_numeric = integrate(-12.0, 12.0, n);
+    std::cout << "Численная площадь: " << area_numeric << std::endl;
+
+    return 0;
+}
